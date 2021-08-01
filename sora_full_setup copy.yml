@@ -12,6 +12,6 @@
   become: true
   gather_facts: false
   roles:
-    # - prepare
-    # - docker
+    - prepare
+    - docker
     - sora
