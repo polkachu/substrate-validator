@@ -5,6 +5,3 @@ node_exporter_checksum: 'f7ef26fb10d143dc4211281d7a2e8b13c4fe1bd0d7abbdff6735a6e
 # Promtail
 promtail_version: 2.2.1
 promtail_checksum: 40d8d414b44baa78c5010cb7575d74eea035b6b00adb78e9676a045d6730a16f
-
-# Substrate
-substrate_version: 1.1.0
