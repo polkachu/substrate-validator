@@ -1,0 +1,37 @@
+- name: Pull Docker image
+  docker_image:
+    name: 'zeitgeistpm/zeitgeist-node:latest'
+    source: pull
+
+- name: create polkadot group
+  group:
+    name: polkadot
+    state: present
+
+- name: add polkadot user
+  user:
+    name: polkadot
+    groups: ['polkadot', 'docker']
+    append: yes
+    shell: /bin/bash
+
+- name: set folder permission if there is an alternative base_path for polkadot
+  file:
+    path: '{{ chain_path }}'
+    state: directory
+    owner: '10000'
+    group: '10000'
+    recurse: true
+    mode: 0755
+  when: chain_path is defined
+  changed_when: false
+
+- name: stop docker process
+  docker_container:
+    name: '{{ validator_name }}'
+    state: absent
+
+- name: Start docker process
+  command: "docker run -d --restart unless-stopped --name {{ validator_name }} -p 9933:9933 -p 9944:9944 -p 127.0.0.1:9615:9615 -u 10000:10000 -v {{ chain_path }}:/zeitgeist zeitgeistpm/zeitgeist-node:latest -d /zeitgeist --name {{ validator_name }} --chain battery_park --telemetry-url '{{ telemetry_url }} 0'"
+# - name: Start docker process with the backup key
+#   command: "docker run -d --restart unless-stopped --name {{ validator_name }} -p 9933:9933 -p 9944:9944 -p 127.0.0.1:9615:9615 -u 10000:10000 -v {{ chain_path }}:/zeitgeist zeitgeistpm/zeitgeist-node:latest -d /zeitgeist --name {{ validator_name }} --chain battery_park --telemetry-url '{{ telemetry_url }} 0' --node-key-file /zeitgeist/secret_ed25519s"
