@@ -84,6 +84,16 @@ ansible-playbook -i inventory polkadex_full_setup.yml -e "target=polkadex1"
 | `moonbase_full_setup.yml`      | Set up a fresh moonbase validator node |
 | `moonbase_update_version.yml ` | Update moonbase validator version      |
 
+## Security and Server Monitoring
+
+We have a rather opinionated security and server monitoring process. The full setup script:
+
+1. Configures firewall and expose/deny ports
+2. Installs node_exporter
+3. Installs promtail (for log monitoring) that points to an internal log monitoring server
+
+If you do not agree with these, you need to revise the scripts yourself to make it fit with your security and server monitoring process. If you have none of it, you can just run the `xxx_update_version.yml` playbook.
+
 ## Nominate Polkadot Validators
 
 - Polkadex: `esqo5YJ4BUPiG2mJrZLLov9hxBtvaUD5M7Bo5ZgkQxLr9X3sb`
