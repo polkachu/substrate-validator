@@ -55,7 +55,7 @@ The structure allows you to target `vars` to each node, or each cluster cluster,
 
 Make sure that you are familiar with the files in the `group_vars` folder. They follow this clustered structure closely. The files in this folder often need to be changed to stay up to date with the latest releases.
 
-## Main Playbook to Set Up a node
+## Playbook Summary
 
 The key Ansible playbook is `xxx_full_setup.yml`. It will set up a fresh validator from scratch. We also offer separate playbook called `xxx_update_version.yml`. It will update the node version and restart the service.
 
@@ -71,7 +71,7 @@ Specifically, if you want to set up a fresh Polkadex validator with the target n
 ansible-playbook -i inventory polkadex_full_setup.yml -e "target=polkadex1"
 ```
 
-The most commonly used playbooks are:
+## Playbook Dictionary
 
 | Playbook                       | Description                            |
 | ------------------------------ | -------------------------------------- |
@@ -83,3 +83,8 @@ The most commonly used playbooks are:
 | `battery_update_version.yml `  | Update battery validator version       |
 | `moonbase_full_setup.yml`      | Set up a fresh moonbase validator node |
 | `moonbase_update_version.yml ` | Update moonbase validator version      |
+
+## Support Polkadot Validators
+
+- Polkadex: `esqo5YJ4BUPiG2mJrZLLov9hxBtvaUD5M7Bo5ZgkQxLr9X3sb`
+- Sora: `cnTkhETZSzY7nZSUgCx1QmYGWWsJ9NKGSPn5CWr92RmXEnbW3`
