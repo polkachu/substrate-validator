@@ -84,7 +84,7 @@ ansible-playbook -i inventory polkadex_full_setup.yml -e "target=polkadex1"
 | `moonbase_full_setup.yml`      | Set up a fresh moonbase validator node |
 | `moonbase_update_version.yml ` | Update moonbase validator version      |
 
-## Support Polkadot Validators
+## Nominate Polkadot Validators
 
 - Polkadex: `esqo5YJ4BUPiG2mJrZLLov9hxBtvaUD5M7Bo5ZgkQxLr9X3sb`
 - Sora: `cnTkhETZSzY7nZSUgCx1QmYGWWsJ9NKGSPn5CWr92RmXEnbW3`
