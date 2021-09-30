@@ -70,3 +70,16 @@ Specifically, if you want to set up a fresh Polkadex validator with the target n
 ```bash
 ansible-playbook -i inventory polkadex_full_setup.yml -e "target=polkadex1"
 ```
+
+The most commonly used playbooks are:
+
+| Playbook                       | Description                            |
+| ------------------------------ | -------------------------------------- |
+| `polkadex_full_setup.yml`      | Set up a fresh polkadex validator node |
+| `polkadex_update_version.yml ` | Update polkadex validator version      |
+| `sora_full_setup.yml`          | Set up a fresh sora validator node     |
+| `sora_update_version.yml `     | Update sora validator version          |
+| `battery_full_setup.yml`       | Set up a fresh battery validator node  |
+| `battery_update_version.yml `  | Update battery validator version       |
+| `moonbase_full_setup.yml`      | Set up a fresh moonbase validator node |
+| `moonbase_update_version.yml ` | Update moonbase validator version      |
