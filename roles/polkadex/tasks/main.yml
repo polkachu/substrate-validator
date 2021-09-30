@@ -11,16 +11,24 @@
     append: yes
     shell: /bin/bash
 
-- name: download polkadot binary
+- name: download zip binary
   get_url:
-    url: 'https://github.com/Polkadex-Substrate/Polkadex/releases/download/v1.0.3/PolkadexNodeUbuntu.zip'
-    dest: /usr/local/bin/polkadot-new
+    url: 'https://github.com/Polkadex-Substrate/Polkadex/releases/download/v{{ substrate_version }}/PolkadexNodeUbuntu.zip'
+    dest: /tmp/PolkadexNodeUbuntu.zip
     force: true
     mode: '0700'
     owner: 'polkadot'
     group: 'polkadot'
 
-- name: create polkadot service file
+- name: Unarchive
+  unarchive:
+    src: /tmp/PolkadexNodeUbuntu.zip
+    dest: /usr/local/bin
+    remote_src: yes
+    owner: 'polkadot'
+    group: 'polkadot'
+
+- name: create service file
   template:
     src: polkadot.service.j2
     dest: /etc/systemd/system/polkadot.service
@@ -28,16 +36,8 @@
     group: root
     mode: 0600
 
-- name: stop polkadot service
+- name: restart polkadot service
   systemd:
     name: polkadot.service
-    state: stopped
+    state: restarted
   changed_when: false
-
-- name: Unarchive
-  unarchive:
-    src: /usr/local/bin/polkadot-new
-    dest: /usr/local/bin
-    remote_src: yes
-    owner: 'polkadot'
-    group: 'polkadot'
