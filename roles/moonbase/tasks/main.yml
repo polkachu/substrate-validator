@@ -3,18 +3,6 @@
     name: 'purestake/moonbeam:v{{ substrate_version }}'
     source: pull
 
-- name: create polkadot group
-  group:
-    name: polkadot
-    state: present
-
-- name: add polkadot user
-  user:
-    name: polkadot
-    groups: ['polkadot', 'docker']
-    append: yes
-    shell: /bin/bash
-
 - name: set folder permission if there is an alternative base_path for polkadot
   file:
     path: '{{ chain_path }}'
@@ -33,3 +21,4 @@
 
 - name: Start docker process
   command: "docker run -d --restart unless-stopped --name {{ validator_name }} --network host -v {{ chain_path }}:/data -u 10000:10000 purestake/moonbeam:v{{ substrate_version }} --base-path=/data --chain alphanet --name {{ validator_name }} --validator --execution wasm --wasm-execution compiled --pruning archive --state-cache-size 1 --telemetry-url '{{ telemetry_url }} 0' -- --pruning archive --name='{{ validator_name }} (Embedded Relay)'"
+# -p 30334:30333 -p 9999:9933 -p 9988:9944

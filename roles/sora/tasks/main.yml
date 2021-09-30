@@ -26,7 +26,7 @@
   when: chain_path is defined
   changed_when: false
 
-- name: stop docker proess
+- name: stop docker process
   docker_container:
     name: '{{ validator_name }}'
     state: absent

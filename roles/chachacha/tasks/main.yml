@@ -1,0 +1,22 @@
+- name: Pull Docker image
+  docker_image:
+    name: 'centrifugeio/rococo:chachacha-v1'
+    source: pull
+# - name: set folder permission if there is an alternative base_path for polkadot
+#   file:
+#     path: '{{ chain_path }}'
+#     state: directory
+#     owner: '10000'
+#     group: '10000'
+#     recurse: true
+#     mode: 0755
+#   when: chain_path is defined
+#   changed_when: false
+
+# - name: stop docker process
+#   docker_container:
+#     name: '{{ validator_name }}'
+#     state: absent
+
+# - name: Start docker process
+#   command: "docker run -d --restart unless-stopped --name {{ validator_name }} --network host -v {{ chain_path }}:/data -u 10000:10000 purestake/moonbeam:v{{ substrate_version }} --base-path=/data --chain alphanet --name {{ validator_name }} --validator --execution wasm --wasm-execution compiled --pruning archive --state-cache-size 1 --telemetry-url '{{ telemetry_url }} 0' -- --pruning archive --name='{{ validator_name }} (Embedded Relay)'"
