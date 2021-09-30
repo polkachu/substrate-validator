@@ -94,7 +94,9 @@ We have a rather opinionated security and server monitoring process. The full se
 
 If you do not agree with these, you need to revise the scripts yourself to make it fit with your security and server monitoring process. If you have none of it, you can just run the `xxx_update_version.yml` playbook.
 
-## Nominate Polkadot Validators
+## Nominate Our Validators
 
 - Polkadex: `esqo5YJ4BUPiG2mJrZLLov9hxBtvaUD5M7Bo5ZgkQxLr9X3sb`
 - Sora: `cnTkhETZSzY7nZSUgCx1QmYGWWsJ9NKGSPn5CWr92RmXEnbW3`
+- Polkadot: `15ym3MDSG4WPABNoEtx2rAzBB1EYWJDWbWYpNg1BwuWRAQcY`
+- Kusama: `CsKvJ4fdesaRALc5swo5iknFDpop7YUwKPJHdmUvBsUcMGb`
