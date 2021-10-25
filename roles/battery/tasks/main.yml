@@ -1,8 +1,4 @@
-- name: Pull Docker image
-  docker_image:
-    name: 'zeitgeistpm/zeitgeist-node:latest'
-    source: pull
-
+---
 - name: create polkadot group
   group:
     name: polkadot
@@ -11,27 +7,58 @@
 - name: add polkadot user
   user:
     name: polkadot
-    groups: ['polkadot', 'docker']
+    groups: ['polkadot']
     append: yes
     shell: /bin/bash
 
-- name: set folder permission if there is an alternative base_path for polkadot
-  file:
-    path: '{{ chain_path }}'
-    state: directory
-    owner: '10000'
-    group: '10000'
-    recurse: true
-    mode: 0755
-  when: chain_path is defined
+- name: stop polkadot service
+  systemd:
+    name: polkadot.service
+    state: stopped
   changed_when: false
 
-- name: stop docker process
-  docker_container:
-    name: '{{ validator_name }}'
-    state: absent
+- name: download custom json
+  get_url:
+    url: 'https://raw.githubusercontent.com/zeitgeistpm/polkadot/battery-station-relay/node/service/res/battery-station-relay.json'
+    dest: /usr/local/bin/battery-station-relay.json
+    force: true
+    mode: '0700'
+    owner: 'polkadot'
+    group: 'polkadot'
 
-- name: Start docker process
-  command: "docker run -d --restart unless-stopped --name {{ validator_name }} -p 9933:9933 -p 9944:9944 -p 127.0.0.1:9615:9615 -u 10000:10000 -v {{ chain_path }}:/zeitgeist zeitgeistpm/zeitgeist-node:latest -d /zeitgeist --name {{ validator_name }} --chain battery_park --telemetry-url '{{ telemetry_url }} 0'"
-# - name: Start docker process with the backup key
-#   command: "docker run -d --restart unless-stopped --name {{ validator_name }} -p 9933:9933 -p 9944:9944 -p 127.0.0.1:9615:9615 -u 10000:10000 -v {{ chain_path }}:/zeitgeist zeitgeistpm/zeitgeist-node:latest -d /zeitgeist --name {{ validator_name }} --chain battery_park --telemetry-url '{{ telemetry_url }} 0' --node-key-file /zeitgeist/secret_ed25519s"
+- name: download binary
+  get_url:
+    url: 'https://github.com/zeitgeistpm/zeitgeist/releases/download/v{{ substrate_version }}/zeitgeist_parachain'
+    dest: /usr/local/bin/zeitgeist-new
+    force: true
+    mode: '0700'
+    owner: 'polkadot'
+    group: 'polkadot'
+
+- name: substitute new binary
+  shell: |
+    set -o pipefail
+    if [ -f /usr/local/bin/zeitgeist-new ]; then
+      cp /usr/local/bin/zeitgeist-new /usr/local/bin/zeitgeist
+      chown polkadot:polkadot /usr/local/bin/zeitgeist
+      chmod 755 /usr/local/bin/zeitgeist
+    fi
+  args:
+    executable: /bin/bash
+  changed_when: False
+
+- name: create service file
+  template:
+    src: polkadot.service.j2
+    dest: /etc/systemd/system/polkadot.service
+    owner: root
+    group: root
+    mode: 0600
+
+- name: restart polkadot service
+  systemd:
+    name: polkadot.service
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+  changed_when: false
