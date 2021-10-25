@@ -4,8 +4,7 @@ This repo is to set up a variety of Substrate-based validator nodes. Currently, 
 
 1. Sora (mainnet)
 2. Polkadex (mainnet)
-3. Moonbase (testnet for Moonriver)
-4. Battery Park (testnet for Zeitgeist)
+3. Battery Station (testnet for Zeitgeist)
 
 ## TL/DR
 
@@ -81,8 +80,6 @@ ansible-playbook -i inventory polkadex_full_setup.yml -e "target=polkadex1"
 | `sora_update_version.yml `     | Update sora validator version          |
 | `battery_full_setup.yml`       | Set up a fresh battery validator node  |
 | `battery_update_version.yml `  | Update battery validator version       |
-| `moonbase_full_setup.yml`      | Set up a fresh moonbase validator node |
-| `moonbase_update_version.yml ` | Update moonbase validator version      |
 
 ## Security and Server Monitoring
 
