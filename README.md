@@ -4,7 +4,7 @@ This repo is to set up a variety of Substrate-based validator nodes. Currently, 
 
 1. Sora (mainnet)
 2. Polkadex (mainnet)
-3. Neatcoin
+3. Neatcoin (mainnet)
 4. Battery Station (testnet for Zeitgeist)
 
 ## TL/DR
