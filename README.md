@@ -4,7 +4,8 @@ This repo is to set up a variety of Substrate-based validator nodes. Currently, 
 
 1. Sora (mainnet)
 2. Polkadex (mainnet)
-3. Battery Station (testnet for Zeitgeist)
+3. Neatcoin
+4. Battery Station (testnet for Zeitgeist)
 
 ## TL/DR
 
@@ -78,6 +79,8 @@ ansible-playbook -i inventory polkadex_full_setup.yml -e "target=polkadex1"
 | `polkadex_update_version.yml ` | Update polkadex validator version      |
 | `sora_full_setup.yml`          | Set up a fresh sora validator node     |
 | `sora_update_version.yml `     | Update sora validator version          |
+| `neatcoin_full_setup.yml`      | Set up a fresh neatcoin validator node |
+| `neatcoin_update_version.yml ` | Update neatcoin validator version      |
 | `battery_full_setup.yml`       | Set up a fresh battery validator node  |
 | `battery_update_version.yml `  | Update battery validator version       |
 
@@ -95,5 +98,6 @@ If you do not agree with these, you need to revise the scripts yourself to make 
 
 - Polkadex: `esqo5YJ4BUPiG2mJrZLLov9hxBtvaUD5M7Bo5ZgkQxLr9X3sb`
 - Sora: `cnTkhETZSzY7nZSUgCx1QmYGWWsJ9NKGSPn5CWr92RmXEnbW3`
+- Neatcoin: `TBD`
 - Polkadot: `15ym3MDSG4WPABNoEtx2rAzBB1EYWJDWbWYpNg1BwuWRAQcY`
 - Kusama: `CsKvJ4fdesaRALc5swo5iknFDpop7YUwKPJHdmUvBsUcMGb`

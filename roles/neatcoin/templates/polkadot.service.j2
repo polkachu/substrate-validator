@@ -1,0 +1,14 @@
+[Unit]
+Description=Polkadot Node
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=polkadot
+Group=polkadot
+ExecStart=/usr/local/bin/neatcoin --validator --unsafe-pruning --pruning=1000 --name '{{ validator_name }}' --telemetry-url '{{ telemetry_url }} 1'
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
