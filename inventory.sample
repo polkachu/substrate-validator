@@ -5,4 +5,4 @@
 ansible_user=ansible
 ansible_port=22
 ansible_ssh_private_key_file="~/.ssh/id_rsa"
-log_monitor=10.0.0.2
+log_monitor=http://10.0.0.2:3100
