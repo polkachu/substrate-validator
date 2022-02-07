@@ -31,8 +31,7 @@
     name: '{{ validator_name }}'
     state: absent
 
-# - name: Start docker process
-#   command: "docker run -d --restart unless-stopped --name {{ validator_name }} -p 127.0.0.1:9933:9933 -p 127.0.0.1:9944:9944 -p 127.0.0.1:9615:9615 -v {{ chain_path }}:/chain sora2/substrate:{{substrate_version}} --name {{ validator_name }} --chain main --base-path /chain --ws-external --rpc-external --unsafe-ws-external --unsafe-rpc-external --unsafe-pruning --pruning=1000 --validator --rpc-methods Unsafe --rpc-cors=all --wasm-execution compiled --prometheus-external --telemetry-url '{{ telemetry_url }} 0'"
+# docker run -d --restart unless-stopped --name polkachu-sora-1 -p 127.0.0.1:9933:9933 -p 127.0.0.1:9944:9944 -p 127.0.0.1:9615:9615 -v /home/polkadot/sora:/chain sora2/substrate:1.2.1 --name polkachu-sora-1 --chain main --base-path /chain --validator --rpc-methods Unsafe --rpc-cors all --execution Wasm --wasm-execution compiled --prometheus-external --telemetry-url 'wss://telemetry.polkadot.io/submit/ 0'
 
 - name: Start docker process
   command: "docker run -d --restart unless-stopped --name {{ validator_name }} -p 127.0.0.1:9933:9933 -p 127.0.0.1:9944:9944 -p 127.0.0.1:9615:9615 -v {{ chain_path }}:/chain sora2/substrate:{{substrate_version}} --name {{ validator_name }} --chain main --base-path /chain --validator --rpc-methods Unsafe --rpc-cors all --execution Wasm --wasm-execution compiled --prometheus-external --telemetry-url '{{ telemetry_url }} 0'"
