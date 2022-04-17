@@ -2,10 +2,7 @@
 
 This repo is to set up a variety of Substrate-based validator nodes. Currently, this script supports:
 
-1. Sora (mainnet)
-2. Polkadex (mainnet)
-3. Neatcoin (mainnet)
-4. Battery Station (testnet for Zeitgeist)
+1. Polkadex (mainnet)
 
 ## TL/DR
 
@@ -28,17 +25,16 @@ cp inventory.sample inventory
 Needless to say, you need to update the dummy values in the inventory file. For each node:
 
 1. Server IP: Your server public IP
-2. validator_name: This is the node name that will show up on telemetry monitoring board. For us, we use something like `polkachu-sora-01` and `polkachu-polkadex-01` to keep it unique and organized.
-3. log_name: This is for your internal central monitoring server. We just use something like `sora1` and `polkadex1` to keep it simple.
+2. validator_name: This is the node name that will show up on telemetry monitoring board. For us, we use something like `polkachu-polkadex-01` to keep it unique and organized.
+3. log_name: This is for your internal central monitoring server. We just use something like `polkadex1` to keep it simple.
 4. telemetry_url: Most likely you will use `wss://telemetry.polkadot.io/submit/`
-5. chain_path (optional): You can set an alternative path to store chain data. To be honest, we do not really use it unless we believe that the storage is so large that we need to mount a dedicate drive.
 
 You will also need to update:
 
-1. ansible_user: The sample file assumes `ansible`, but you might have another username. Make sure that the user has `sudo` privilege.
-2. ansible_port: The sample file assumes `22`. But if you are like me, you will have a different ssh port other than `22` to avoid port sniffing.
-3. ansible_ssh_private_key_file: The sample file assumes `~/.ssh/id_rsa`, but you might have a different key location.
-4. log_monitor: Enter your monitor server IP. It is most likely a private IP address if you use a firewall around your private virtual cloud (VPC).
+5. ansible_user: The sample file assumes `ansible`, but you might have another username. Make sure that the user has `sudo` privilege.
+6. ansible_port: The sample file assumes `22`. But if you are like me, you will have a different ssh port other than `22` to avoid port sniffing.
+7. ansible_ssh_private_key_file: The sample file assumes `~/.ssh/id_rsa`, but you might have a different key location.
+8. log_monitor: Enter your monitor server IP. It is most likely a private IP address if you use a firewall around your private virtual cloud (VPC).
 
 It is beyond the scope of this guide to help you create a sudo user, alternate ssh port, create a private key, install Ansible on your machine, etc. You can do a quick online search and find the answers. In my experience, Digital Ocean have some quality guides on these topics. Stack Overflow can help you trouble-shoot if you are stuck.
 
@@ -77,12 +73,6 @@ ansible-playbook -i inventory polkadex_full_setup.yml -e "target=polkadex1"
 | ------------------------------ | -------------------------------------- |
 | `polkadex_full_setup.yml`      | Set up a fresh polkadex validator node |
 | `polkadex_update_version.yml ` | Update polkadex validator version      |
-| `sora_full_setup.yml`          | Set up a fresh sora validator node     |
-| `sora_update_version.yml `     | Update sora validator version          |
-| `neatcoin_full_setup.yml`      | Set up a fresh neatcoin validator node |
-| `neatcoin_update_version.yml ` | Update neatcoin validator version      |
-| `battery_full_setup.yml`       | Set up a fresh battery validator node  |
-| `battery_update_version.yml `  | Update battery validator version       |
 
 ## Security and Server Monitoring
 
@@ -97,7 +87,5 @@ If you do not agree with these, you need to revise the scripts yourself to make 
 ## Nominate Our Validators
 
 - Polkadex: `esqo5YJ4BUPiG2mJrZLLov9hxBtvaUD5M7Bo5ZgkQxLr9X3sb`
-- Sora: `cnTkhETZSzY7nZSUgCx1QmYGWWsJ9NKGSPn5CWr92RmXEnbW3`
-- Neatcoin: `TBD`
 - Polkadot: `15ym3MDSG4WPABNoEtx2rAzBB1EYWJDWbWYpNg1BwuWRAQcY`
 - Kusama: `CsKvJ4fdesaRALc5swo5iknFDpop7YUwKPJHdmUvBsUcMGb`
