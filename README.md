@@ -1,8 +1,6 @@
 # Substrate-based Validator Node Ansible Setup
 
-This repo is to set up a variety of Substrate-based validator nodes. Currently, this script supports:
-
-1. Polkadex (mainnet)
+This repo is to set up a variety of Substrate-based validator nodes. Currently, this script only supports Polkadex mainnet.
 
 ## TL/DR
 
@@ -25,16 +23,16 @@ cp inventory.sample inventory
 Needless to say, you need to update the dummy values in the inventory file. For each node:
 
 1. Server IP: Your server public IP
-2. validator_name: This is the node name that will show up on telemetry monitoring board. For us, we use something like `polkachu-polkadex-01` to keep it unique and organized.
-3. log_name: This is for your internal central monitoring server. We just use something like `polkadex1` to keep it simple.
-4. telemetry_url: Most likely you will use `wss://telemetry.polkadot.io/submit/`
+1. validator_name: This is the node name that will show up on telemetry monitoring board. For us, we use something like `polkachu-polkadex-01` to keep it unique and organized.
+1. log_name: This is for your internal central monitoring server. We just use something like `polkadex1` to keep it simple.
 
 You will also need to update:
 
-5. ansible_user: The sample file assumes `ansible`, but you might have another username. Make sure that the user has `sudo` privilege.
-6. ansible_port: The sample file assumes `22`. But if you are like me, you will have a different ssh port other than `22` to avoid port sniffing.
-7. ansible_ssh_private_key_file: The sample file assumes `~/.ssh/id_rsa`, but you might have a different key location.
-8. log_monitor: Enter your monitor server IP. It is most likely a private IP address if you use a firewall around your private virtual cloud (VPC).
+1. ansible_user: The sample file assumes `ansible`, but you might have another username. Make sure that the user has `sudo` privilege.
+1. ansible_port: The sample file assumes `22`. But if you are like me, you will have a different ssh port other than `22` to avoid port sniffing.
+1. ansible_ssh_private_key_file: The sample file assumes `~/.ssh/id_rsa`, but you might have a different key location.
+1. log_monitor: Enter your monitor server IP. It is most likely a private IP address if you use a firewall around your private virtual cloud (VPC).
+1. telemetry_url: Most likely you will use `wss://telemetry.polkadot.io/submit/`
 
 It is beyond the scope of this guide to help you create a sudo user, alternate ssh port, create a private key, install Ansible on your machine, etc. You can do a quick online search and find the answers. In my experience, Digital Ocean have some quality guides on these topics. Stack Overflow can help you trouble-shoot if you are stuck.
 
@@ -42,10 +40,9 @@ It is beyond the scope of this guide to help you create a sudo user, alternate s
 
 We have a rather opinionated node cluster structure. The basic structure is:
 
-1. Name each sora node as `sora1`, `sora2`, etc. Group all Sora nodes into `sora` group.
-2. Name each polkadex node as `polkadex1`, `polkadex2`, etc. Group all Polkadex nodes into `polkadex` group.
-3. So or and so forth for all other nodes.
-4. Group all nodes into a `validators` group.
+1. Name each polkadex node as `polkadex1`, `polkadex2`, etc. Group all polkadex nodes into `polkadex` group.
+1. So or and so forth for all other nodes.
+1. Group all nodes into a `validators` group.
 
 The structure allows you to target `vars` to each node, or each cluster cluster, or the whole cluster.
 

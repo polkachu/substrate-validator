@@ -1,8 +1,9 @@
-[sora1]
-10.0.0.1 validator_name=polkachu-sora-1 log_name=sora1 telemetry_url=wss://telemetry.polkadot.io/submit/ chain_path=/home/polkadot/sora
+[polkadex]
+10.0.0.1 validator_name=polkachu-polkadex-1 log_name=polkadex1
 
 [all:vars]
 ansible_user=ansible
 ansible_port=22
 ansible_ssh_private_key_file="~/.ssh/id_rsa"
 log_monitor=http://10.0.0.2:3100
+telemetry_url=wss://telemetry.polkadot.io/submit/
