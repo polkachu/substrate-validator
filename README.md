@@ -93,7 +93,7 @@ lz4 -c -d polkadex_1457381.tar.lz4 | tar -x -C .
 cd /home/polkadot/.local/share/polkadex-node/chains/polkadex_main_network
 sudo rm -rf db
 sudo mv $HOME/db .
-sudo chown -r polkadot:polkadot db
+sudo chown -R polkadot:polkadot db
 curl -H "Content-Type: application/json" -d '{"id":1, "jsonrpc":"2.0", "method": "author_rotateKeys", "params":[]}' http://localhost:9933
 
 ```
