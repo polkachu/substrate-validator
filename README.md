@@ -81,6 +81,23 @@ We have a rather opinionated security and server monitoring process. The full se
 
 If you do not agree with these, you need to revise the scripts yourself to make it fit with your security and server monitoring process. If you have none of it, you can just run the `xxx_update_version.yml` playbook.
 
+## Some ad hoc commands for personal use
+
+```
+sudo apt update
+sudo apt install snapd
+sudo snap install lz4
+wget -O polkadex_1457381.tar.lz4 https://substrate-snapshots.polkachu.xyz/polkadex/polkadex_1457381.tar.lz4 &
+
+lz4 -c -d polkadex_1457381.tar.lz4 | tar -x -C .
+cd /home/polkadot/.local/share/polkadex-node/chains/polkadex_main_network
+sudo rm -rf db
+sudo mv $HOME/db .
+sudo chown -r polkadot:polkadot db
+curl -H "Content-Type: application/json" -d '{"id":1, "jsonrpc":"2.0", "method": "author_rotateKeys", "params":[]}' http://localhost:9933
+
+```
+
 ## Nominate Our Validators
 
 - Polkadex: `esqo5YJ4BUPiG2mJrZLLov9hxBtvaUD5M7Bo5ZgkQxLr9X3sb`
