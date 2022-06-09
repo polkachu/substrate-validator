@@ -90,14 +90,16 @@ If you do not agree with these, you need to revise the scripts yourself to make 
 sudo apt update
 sudo apt install snapd
 sudo snap install lz4
-wget -O polkadex_1457381.tar.lz4 https://substrate-snapshots.polkachu.xyz/polkadex/polkadex_1457381.tar.lz4 &
+wget -O polkadex_1457381.tar.lz4 https://substrate-snapshots.polkachu.xyz/polkadex/polkadex_1680451.tar.lz4 &
 
 sudo service polkadot stop
-lz4 -c -d polkadex_1457381.tar.lz4 | tar -x -C .
+lz4 -c -d polkadex_1680451.tar.lz4 | tar -x -C .
+sudo su
 cd /home/polkadot/.local/share/polkadex-node/chains/polkadex_main_network
 sudo rm -rf db
-sudo mv $HOME/db .
+sudo mv /home/ubuntu/db .
 sudo chown -R polkadot:polkadot db
+exit
 sudo service polkadot start
 
 curl -H "Content-Type: application/json" -d '{"id":1, "jsonrpc":"2.0", "method": "author_rotateKeys", "params":[]}' http://localhost:9933
