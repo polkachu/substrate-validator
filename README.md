@@ -68,11 +68,11 @@ ansible-playbook system_update.yml -e "target=VALIDATOR_TARGET"
 
 ## Playbook Dictionary
 
-| Playbook                       | Description                            |
-| ------------------------------ | -------------------------------------- |
-| `polkadex_full_setup.yml`      | Set up a fresh polkadex validator node |
-| `polkadex_update_version.yml ` | Update polkadex validator version      |
-| `system_update.yml `           | Update the OS                          |
+| Playbook                      | Description                            |
+| ----------------------------- | -------------------------------------- |
+| `polkadex_full_setup.yml`     | Set up a fresh polkadex validator node |
+| `polkadex_update_version.yml` | Update polkadex validator version      |
+| `system_update.yml`           | Update the OS                          |
 
 ## Security and Server Monitoring
 
