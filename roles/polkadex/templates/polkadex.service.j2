@@ -1,17 +1,23 @@
 [Unit]
-Description=Polkadot Node
+Description=Polkadex Node ({{ inventory_hostname }})
 After=network-online.target
 Wants=network-online.target
 
 [Service]
-User=polkadot
-Group=polkadot
+User={{ ansible_user }}
 ExecStart=/usr/local/bin/polkadex-node \
  --chain=/usr/local/bin/customSpecRaw.json \
  --bootnodes /ip4/13.235.190.203/tcp/30333/p2p/12D3KooWMJ4AMmzpRbv914ZGZR6ehBhcZvGtqYid5jxSx8vXiSr7 \
  --validator \
  --name '{{ validator_name }}' \
- --telemetry-url '{{ telemetry_url }} 1'
+ --base-path {{ base_path }} \
+ --telemetry-url '{{ telemetry_url }} 1' \
+ --prometheus-external \
+ --prometheus-port {{ port_prefix }}16 \
+ --port {{ port_prefix }}00 \
+ --rpc-port {{ port_prefix }}33
+ --ws-port {{ port_prefix}}44
+
 Restart=always
 RestartSec=60
 

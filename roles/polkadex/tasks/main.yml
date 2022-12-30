@@ -1,45 +1,47 @@
 ---
-- name: create polkadot group
-  group:
-    name: polkadot
-    state: present
+- name: Ensure base path exists
+  file:
+    path: '{{ base_path }}'
+    state: directory
+    mode: '0755'
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
 
-- name: add polkadot user
-  user:
-    name: polkadot
-    groups: ['polkadot']
-    append: yes
-    shell: /bin/bash
-
-- name: download zip binary
+- name: download polkadot binary
   get_url:
     url: 'https://github.com/Polkadex-Substrate/Polkadex/releases/download/v{{ substrate_version }}/PolkadexNodeUbuntu.zip'
-    dest: /tmp/PolkadexNodeUbuntu.zip
-    force: true
+    dest: '/tmp/polkadex.zip'
     mode: '0700'
-    owner: 'polkadot'
-    group: 'polkadot'
 
 - name: Unarchive
   unarchive:
-    src: /tmp/PolkadexNodeUbuntu.zip
+    src: /tmp/polkadex.zip
     dest: /usr/local/bin
     remote_src: yes
-    owner: 'polkadot'
-    group: 'polkadot'
+    owner: '{{ ansible_user }}'
+    mode: '0755'
 
 - name: create service file
   template:
-    src: polkadot.service.j2
-    dest: /etc/systemd/system/polkadot.service
+    src: polkadex.service.j2
+    dest: '/etc/systemd/system/{{ inventory_hostname }}.service'
     owner: root
     group: root
-    mode: 0600
+    mode: '0744'
 
-- name: restart polkadot service
+- name: open prometheus and p2p ports
+  ufw:
+    rule: allow
+    port: '{{ item }}'
+    proto: tcp
+  loop:
+    - '{{ port_prefix }}16'
+    - '{{ port_prefix }}00'
+
+- name: start service
+  become: true
   systemd:
-    name: polkadot.service
+    name: '{{ inventory_hostname }}'
     state: restarted
     daemon_reload: yes
     enabled: yes
-  changed_when: false

@@ -7,7 +7,7 @@ This repo is to set up a variety of Substrate-based validator nodes. Currently, 
 You run one playbook and set up a node. For example:
 
 ```bash
-ansible-playbook polkadex_full_setup.yml -e "target=polkadex1"
+ansible-playbook polkadex.yml -e "target=polkadex1"
 ```
 
 But before you rush with this easy setup, you probably want to read on so you understand the structure of this Ansible program and all the features it offers.
@@ -17,7 +17,7 @@ But before you rush with this easy setup, you probably want to read on so you un
 First of all, make sure that you have a production inventory file with your confidential server info. You will start by copying the sample inventory file (included in the repo). The sample file gives you a good idea on how to define the inventory.
 
 ```bash
-cp inventory.sample inventory
+cp inventory.sample.ini inventory.ini
 ```
 
 Needless to say, you need to update the dummy values in the inventory file. For each node:
@@ -54,13 +54,14 @@ Make sure that you are familiar with the files in the `group_vars` folder. They 
 
 ## Playbook Summary
 
-1. The key Ansible playbook is `xxx_full_setup.yml`. It will set up a fresh validator from scratch.
+1. The key Ansible playbook is `polkadex.yml`. It will set up a fresh validator from scratch.
 1. We also offer separate playbook called `xxx_update_version.yml`. It will update the node version and restart the service.
 
 A generic example for running a playbook is as follows:
 
 ```bash
-ansible-playbook polkadex_full_setup.yml -e "target=VALIDATOR_TARGET"
+ansible-playbook polkadex.yml -e "target=VALIDATOR_TARGET"
+ansible-playbook key_rotation.yml -e "target=VALIDATOR_TARGET"
 ```
 
 ## Playbook Dictionary
@@ -77,27 +78,3 @@ We have a rather opinionated security and server monitoring process. The full se
 1. Configures firewall and expose/deny ports
 2. Installs node_exporter
 3. Installs promtail (for log monitoring) that points to an internal log monitoring server
-
-If you do not agree with these, you need to revise the scripts yourself to make it fit with your security and server monitoring process. If you have none of it, you can just run the `xxx_update_version.yml` playbook.
-
-## Some ad hoc commands for personal use
-
-```
-sudo apt update
-sudo apt install snapd
-sudo snap install lz4
-wget -O polkadex_1457381.tar.lz4 https://substrate-snapshots.polkachu.xyz/polkadex/polkadex_1680451.tar.lz4 &
-
-sudo service polkadot stop
-lz4 -c -d polkadex_1680451.tar.lz4 | tar -x -C .
-sudo su
-cd /home/polkadot/.local/share/polkadex-node/chains/polkadex_main_network
-sudo rm -rf db
-sudo mv /home/ubuntu/db .
-sudo chown -R polkadot:polkadot db
-exit
-sudo service polkadot start
-
-curl -H "Content-Type: application/json" -d '{"id":1, "jsonrpc":"2.0", "method": "author_rotateKeys", "params":[]}' http://localhost:9933
-
-```

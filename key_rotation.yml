@@ -1,7 +1,7 @@
 ---
-- name: Update version
+- name: Rotate keys
   hosts: '{{ target }}'
   become: true
   gather_facts: false
   roles:
-    - polkadex
+    - key_rotation
