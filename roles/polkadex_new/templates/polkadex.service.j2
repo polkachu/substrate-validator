@@ -1,0 +1,24 @@
+[Unit]
+Description=Polkadot Node
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=polkadot
+Group=polkadot
+ExecStart=/usr/local/bin/polkadex-node \
+ --chain=/usr/local/bin/customSpecRaw.json \
+ --bootnodes /ip4/13.235.190.203/tcp/30333/p2p/12D3KooWMJ4AMmzpRbv914ZGZR6ehBhcZvGtqYid5jxSx8vXiSr7 \
+ --validator \
+ --name '{{ validator_name }}' \
+ --telemetry-url '{{ telemetry_url }} 1' \
+ --port {{ port_prefix }}33 \
+ --prometheus-external \
+ --prometheus-port {{ port_prefix }}16 \
+ --base-path {{ base_path }}
+
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target

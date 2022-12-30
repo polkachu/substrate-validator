@@ -56,13 +56,11 @@ Make sure that you are familiar with the files in the `group_vars` folder. They 
 
 1. The key Ansible playbook is `xxx_full_setup.yml`. It will set up a fresh validator from scratch.
 1. We also offer separate playbook called `xxx_update_version.yml`. It will update the node version and restart the service.
-1. Finally, we have a `system_update.yml` playbook to update the OS.
 
 A generic example for running a playbook is as follows:
 
 ```bash
-ansible-playbook xxx_full_setup.yml -e "target=VALIDATOR_TARGET"
-ansible-playbook system_update.yml -e "target=VALIDATOR_TARGET"
+ansible-playbook polkadex_full_setup.yml -e "target=VALIDATOR_TARGET"
 ```
 
 ## Playbook Dictionary
@@ -71,7 +69,6 @@ ansible-playbook system_update.yml -e "target=VALIDATOR_TARGET"
 | ----------------------------- | -------------------------------------- |
 | `polkadex_full_setup.yml`     | Set up a fresh polkadex validator node |
 | `polkadex_update_version.yml` | Update polkadex validator version      |
-| `system_update.yml`           | Update the OS                          |
 
 ## Security and Server Monitoring
 
