@@ -62,7 +62,6 @@ A generic example for running a playbook is as follows:
 
 ```bash
 ansible-playbook xxx_full_setup.yml -e "target=VALIDATOR_TARGET"
-ansible-playbook xxx_update_version.yml -e "target=VALIDATOR_TARGET"
 ansible-playbook system_update.yml -e "target=VALIDATOR_TARGET"
 ```
 
