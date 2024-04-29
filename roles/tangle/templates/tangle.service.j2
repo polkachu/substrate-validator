@@ -1,0 +1,24 @@
+[Unit]
+Description=Tangle Validator ({{ inventory_hostname }})
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User={{ ansible_user }}
+Restart=always
+RestartSec=3
+ExecStart=/usr/bin/{{ inventory_hostname }} \
+# --validator \ # Make sure to uncomment this line if you are running a validator
+ --chain tangle-mainnet \
+ --node-key-file "{{ base_path }}/node-key" \
+ --name '{{ validator_name }}' \
+ --base-path {{ base_path }} \
+ --telemetry-url '{{ telemetry_url }} 1' \
+ --port {{ port_prefix }}00 \
+ --rpc-port {{ port_prefix }}33
+ --ws-port {{ port_prefix}}44
+ --rpc-cors all \
+ --no-mdns
+
+[Install]
+WantedBy=multi-user.target

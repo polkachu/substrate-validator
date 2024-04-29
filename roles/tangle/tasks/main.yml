@@ -1,0 +1,40 @@
+---
+- name: Ensure base path exists
+  file:
+    path: '{{ base_path }}'
+    state: directory
+    mode: '0755'
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+
+- name: download tangle binary
+  get_url:
+    url: 'https://github.com/webb-tools/tangle/releases/download/{{ version }}/tangle-default-linux-amd64'
+    dest: '/usr/bin/{{ inventory_hostname }}'
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+    mode: '0700'
+
+- name: create service file
+  template:
+    src: tangle.service.j2
+    dest: '/etc/systemd/system/{{ inventory_hostname }}.service'
+    owner: root
+    group: root
+    mode: '0744'
+
+- name: open p2p ports
+  ufw:
+    rule: allow
+    port: '{{ item }}'
+    proto: tcp
+  loop:
+    - '{{ port_prefix }}00'
+
+- name: start service
+  become: true
+  systemd:
+    name: '{{ inventory_hostname }}'
+    state: restarted
+    daemon_reload: yes
+    enabled: yes

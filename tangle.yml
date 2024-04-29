@@ -1,0 +1,7 @@
+---
+- name: Validator Full Setup
+  hosts: '{{ target }}'
+  become: true
+  gather_facts: false
+  roles:
+    - tangle
