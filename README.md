@@ -23,7 +23,7 @@ cp inventory.sample.ini inventory.ini
 
 Needless to say, you need to update the dummy values in the inventory file.
 
-1. ansible_user: The sample file assumes `ansible`, but you might have another username. Make sure that the user has `sudo` privilege.
+1. ansible_user: The sample file assumes `ubuntu`, but you might have another username. Make sure that the user has `sudo` privilege.
 1. ansible_port: The sample file assumes `22`. But if you are like me, you will have a different ssh port other than `22` to avoid port sniffing.
 1. ansible_ssh_private_key_file: The sample file assumes `~/.ssh/id_rsa`, but you might have a different key location.
 1. telemetry_url: Most likely you will use `wss://telemetry.polkadot.io/submit/`
