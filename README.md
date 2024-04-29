@@ -21,18 +21,7 @@ First of all, make sure that you have a production inventory file with your conf
 cp inventory.sample.ini inventory.ini
 ```
 
-Needless to say, you need to update the dummy values in the inventory file. For each node:
-
-1. ansible_host: Your server public IP
-1. validator_name (optional): We can override the validator_name variable from the group
-1. log_name (optional): We can override the log_name variable from the group
-
-For each cluster:
-
-1. validator_name
-1. log_name
-
-For all clusters:
+Needless to say, you need to update the dummy values in the inventory file.
 
 1. ansible_user: The sample file assumes `ansible`, but you might have another username. Make sure that the user has `sudo` privilege.
 1. ansible_port: The sample file assumes `22`. But if you are like me, you will have a different ssh port other than `22` to avoid port sniffing.
@@ -67,8 +56,8 @@ ansible-playbook key_rotation.yml -e "target=VALIDATOR_TARGET"
 
 ## Playbook Dictionary
 
-| Playbook           | Description                                                                                    |
-| ------------------ | ---------------------------------------------------------------------------------------------- |
-| `polkadex.yml`     | Set up a fresh polkadex validator node                                                         |
-| `tangle.yml`       | Set up a fresh polkadex node node (Need to manually uncomment a flag to enable validator mode) |
-| `key_rotation.yml` | Rotate session key                                                                             |
+| Playbook           | Description                            |
+| ------------------ | -------------------------------------- |
+| `polkadex.yml`     | Set up a fresh polkadex validator node |
+| `tangle.yml`       | Set up a fresh tangle validator node   |
+| `key_rotation.yml` | Rotate session key                     |

@@ -8,7 +8,7 @@ User={{ ansible_user }}
 Restart=always
 RestartSec=3
 ExecStart=/usr/bin/{{ inventory_hostname }} \
-# --validator \ # Make sure to uncomment this line if you are running a validator
+ --validator \
  --chain tangle-mainnet \
  --node-key-file "{{ base_path }}/node-key" \
  --name '{{ validator_name }}' \
