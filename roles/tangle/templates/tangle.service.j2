@@ -15,8 +15,9 @@ ExecStart=/usr/bin/{{ inventory_hostname }} \
  --base-path {{ base_path }} \
  --telemetry-url '{{ telemetry_url }} 1' \
  --port {{ port_prefix }}00 \
- --rpc-port {{ port_prefix }}33
- --ws-port {{ port_prefix}}44
+ --rpc-port {{ port_prefix }}33 \
+ --prometheus-port {{ port_prefix}}16 \
+ --prometheus-external \
  --rpc-cors all \
  --no-mdns
 
