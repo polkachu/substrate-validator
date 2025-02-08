@@ -1,2 +1,5 @@
 # Substrate
 version: v1.0.0
+
+# Tangle binary
+tangle_binary: https://github.com/webb-tools/tangle/releases/download/{{ version }}/tangle-default-linux-amd64

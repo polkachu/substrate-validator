@@ -7,8 +7,8 @@ This repo is to set up a variety of Substrate-based validator nodes. Currently, 
 You run one playbook and set up a node. For example:
 
 ```bash
-ansible-playbook polkadex.yml -e "target=polkadex01"
-ansible-playbook tangle.yml -e "target=tangle01"
+ansible-playbook playbooks/polkadex.yml -e "target=polkadex01"
+ansible-playbook playbooks/tangle.yml -e "target=tangle01"
 ```
 
 But before you rush with this easy setup, you probably want to read on so you understand the structure of this Ansible program and all the features it offers.
@@ -49,9 +49,9 @@ The key Ansible playbook is `polkadex.yml` and `tangle.yml`. It will set up a fr
 A generic example for running a playbook is as follows:
 
 ```bash
-ansible-playbook polkadex.yml -e "target=VALIDATOR_TARGET"
-ansible-playbook tangle.yml -e "target=VALIDATOR_TARGET"
-ansible-playbook key_rotation.yml -e "target=VALIDATOR_TARGET"
+ansible-playbook playbooks/polkadex.yml -e "target=VALIDATOR_TARGET"
+ansible-playbook playbooks/tangle.yml -e "target=VALIDATOR_TARGET"
+ansible-playbook playbooks/key_rotation.yml -e "target=VALIDATOR_TARGET"
 ```
 
 ## Playbook Dictionary

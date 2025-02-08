@@ -9,7 +9,7 @@
 
 - name: download tangle binary
   get_url:
-    url: 'https://github.com/webb-tools/tangle/releases/download/{{ version }}/tangle-default-linux-amd64'
+    url: "{{ tangle_binary }}"
     dest: '/usr/bin/{{ inventory_hostname }}'
     owner: '{{ ansible_user }}'
     group: '{{ ansible_user }}'

@@ -1,2 +1,8 @@
 # Substrate
 substrate_version: 4.0.0
+
+# Polkadot binary
+polkadot_binary: https://github.com/Polkadex-Substrate/Polkadex/releases/download/v{{ substrate_version }}/PolkadexNodeUbuntu.zip
+
+# Bootnodes 
+bootnodes_var: /ip4/13.235.190.203/tcp/30333/p2p/12D3KooWMJ4AMmzpRbv914ZGZR6ehBhcZvGtqYid5jxSx8vXiSr7
