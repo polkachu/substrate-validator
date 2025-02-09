@@ -7,7 +7,7 @@ Wants=network-online.target
 User={{ ansible_user }}
 ExecStart=/usr/local/bin/polkadex-node \
  --chain=/usr/local/bin/customSpecRaw.json \
- --bootnodes /ip4/13.235.190.203/tcp/30333/p2p/12D3KooWMJ4AMmzpRbv914ZGZR6ehBhcZvGtqYid5jxSx8vXiSr7 \
+ --bootnodes "{{ bootnodes_var }}" \
  --validator \
  --name '{{ validator_name }}' \
  --base-path {{ base_path }} \

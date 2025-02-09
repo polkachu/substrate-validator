@@ -9,7 +9,7 @@
 
 - name: download polkadot binary
   get_url:
-    url: 'https://github.com/Polkadex-Substrate/Polkadex/releases/download/v{{ substrate_version }}/PolkadexNodeUbuntu.zip'
+    url: "{{ polkadot_binary }}"
     dest: '/tmp/polkadex.zip'
     mode: '0700'
 
